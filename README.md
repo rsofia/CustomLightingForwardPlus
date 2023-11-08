@@ -10,7 +10,7 @@ This repository expands on NedMakesGame's awesome "[Creating Custom Lighting in 
 2. Forward+ needs light loop macros LIGHT_LOOP_BEGIN and LIGHT_LOOP_END to iterate through the lights, and this loop requires a local variable of type InputData.
 
 3. Because of how culling works in Forward+, it won't find additional lights when the camera is at a certain distance, so you'll need to make sure to check the clip space position for it to work. 
-![Screenshot of how to fetch the clip position with theScreenPosition node and the Mode set to Pixel, ]([https://github.com/rsofia/CustomLightingForwardPlus/blob/main/Images/ClipPos.PNG)
+![Screenshot of how to fetch the clip position with theScreenPosition node and the Mode set to Pixel, ](https://github.com/rsofia/CustomLightingForwardPlus/blob/main/Images/ClipPos.PNG)
 
 ## Comparison
 The following screenshot shows a comparison between the Universal RP Lit shader and the custom ShaderGraph shader, and both show the result with 3 Point Lights. 
