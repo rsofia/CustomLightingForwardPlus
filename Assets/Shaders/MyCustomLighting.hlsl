@@ -30,7 +30,8 @@ float GetSmoothnessPower(float rawSmoothness) {
 }
 
 #ifndef SHADERGRAPH_PREVIEW
-float3 CustomLightHandling(CustomLightingData d, Light light) {
+float3 CustomLightHandling(CustomLightingData d, Light light)
+{
 
     float3 radiance = light.color * (light.distanceAttenuation * light.shadowAttenuation);
 
@@ -47,37 +48,39 @@ float3 CustomLightHandling(CustomLightingData d, Light light) {
 void AdditionalLights(CustomLightingData d, inout float3 lightColor)
 {
 #ifndef SHADERGRAPH_PREVIEW
-#ifdef _ADDITIONAL_LIGHTS
-    // Additional lights as in the tutorial
-    uint numAdditionalLights = GetAdditionalLightsCount();
-    for (uint lightI = 0; lightI < numAdditionalLights; lightI++) {
-        Light light = GetAdditionalLight(lightI, d.positionWS, 1);
-        lightColor += CustomLightHandling(d, light);
-    }
+    #ifdef _ADDITIONAL_LIGHTS
+        // Additional lights as in the tutorial
+        uint numAdditionalLights = GetAdditionalLightsCount();
+        for (uint lightI = 0; lightI < numAdditionalLights; lightI++) {
+            Light light = GetAdditionalLight(lightI, d.positionWS, 1);
+            lightColor += CustomLightHandling(d, light);
+        }
 
-#ifdef _FORWARD_PLUS
-    uint lightsCount = GetAdditionalLightsCount();
-    InputData inputData = (InputData)0;
-    inputData.positionWS = d.positionWS;
-    inputData.normalWS = d.normalWS;
-    inputData.viewDirectionWS = d.viewDirectionWS;
-    inputData.shadowCoord = d.shadowCoord;
+        #ifdef _FORWARD_PLUS //with Forward Plus, make sure this keyword is enabled in the graph
+            uint lightsCount = GetAdditionalLightsCount();
+            InputData inputData = (InputData)0;
+            inputData.positionWS = d.positionWS;
+            inputData.normalWS = d.normalWS;
+            inputData.viewDirectionWS = d.viewDirectionWS;
+            inputData.shadowCoord = d.shadowCoord;
 
-    //Fix lights disappearing 
-    float4 screenPos = float4(d.positionCS.x, (_ScaledScreenParams.y - d.positionCS.y), 0, 0);
-    inputData.normalizedScreenSpaceUV = GetNormalizedScreenSpaceUV(screenPos);
+            //Fix lights disappearing 
+            float4 screenPos = float4(d.positionCS.x, (_ScaledScreenParams.y - d.positionCS.y), 0, 0);
+            inputData.normalizedScreenSpaceUV = GetNormalizedScreenSpaceUV(screenPos);
 
-    LIGHT_LOOP_BEGIN(lightsCount)
-         Light light = GetAdditionalLight(lightIndex, d.positionWS);
-         lightColor += CustomLightHandling(d, light);
-    LIGHT_LOOP_END
-#endif
+            LIGHT_LOOP_BEGIN(lightsCount)
+                 Light light = GetAdditionalLight(lightIndex, d.positionWS);
+                 lightColor += CustomLightHandling(d, light);
+            LIGHT_LOOP_END
+        #endif  //end _FORWARD_PLUS
 
-#endif
-#endif
+    #endif  //end _ADDITIONAL_LIGHTS
+
+#endif  //end SHADERGRAPH_PREVIEW
 }
 
-float3 CalculateCustomLighting(CustomLightingData d) {
+float3 CalculateCustomLighting(CustomLightingData d)
+{
     #ifdef SHADERGRAPH_PREVIEW
     // In preview, estimate diffuse + specular
     float3 lightDir = float3(0.5, 0.5, 0);
@@ -104,7 +107,8 @@ float3 CalculateCustomLighting(CustomLightingData d) {
 
 void CalculateCustomLighting_float(float3 ClipPos,float3 Position, float3 Normal, float3 ViewDirection,
     float3 Albedo, float Smoothness,
-    out float3 Color) {
+    out float3 Color)
+    {
 
     CustomLightingData d;
     d.normalWS = Normal;
