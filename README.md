@@ -1,5 +1,5 @@
 # Custom Lighting in Forward+ with Shader Graph
- How to implement custom lighting for Forward+ with ShaderGraph 
+ How to implement custom lighting for the [Forward+](https://docs.unity3d.com/Packages/com.unity.render-pipelines.universal@17.0/manual/rendering/forward-plus-rendering-path.html) rendering path with ShaderGraph. The project is using Unity 2022.3.10f1.  
 
 This repository expands on NedMakesGame's awesome "[Creating Custom Lighting in Unity's Shader Graph with Universal Render Pipeline ](https://nedmakesgames.medium.com/creating-custom-lighting-in-unitys-shader-graph-with-universal-render-pipeline-5ad442c27276)" tutorial. I've just made some tweaks to work with Additional Lights in Forward+. 
 
@@ -36,7 +36,12 @@ This repository expands on NedMakesGame's awesome "[Creating Custom Lighting in 
 
 ## Comparison
 The following screenshot shows a comparison between the Universal RP Lit shader and the custom ShaderGraph shader, and both show the result with 3 Point Lights. 
+
 ![Comparison GIF between additional lights in Lit and the custom ShaderGraph shader](https://github.com/rsofia/CustomLightingForwardPlus/blob/main/Images/ScreenSpace_ForwardPlus.gif)
 
 ## Resources
+ + NedMakesGame's "[Creating Custom Lighting in Unity's Shader Graph with Universal Render Pipeline ](https://nedmakesgames.medium.com/creating-custom-lighting-in-unitys-shader-graph-with-universal-render-pipeline-5ad442c27276)
+ + [Forward+](https://docs.unity3d.com/Packages/com.unity.render-pipelines.universal@17.0/manual/rendering/forward-plus-rendering-path.html)
+ + [Shedding Light on Universal Render Pipeline for Unity 2021 LTS](https://blog.unity.com/engine-platform/shedding-light-on-universal-render-pipeline-for-unity-2021-lts)
+ + [Custom Lighting in Shader Graph: Expanding your graphs in 2019](https://blog.unity.com/engine-platform/custom-lighting-in-shader-graph-expanding-your-graphs-in-2019)
 
